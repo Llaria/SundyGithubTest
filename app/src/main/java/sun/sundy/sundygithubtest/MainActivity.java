@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    // 顶尖秤测试
     public void aclas_test(View view) {
         startActivity(new Intent(this,AclasTestActivity.class));
     }
