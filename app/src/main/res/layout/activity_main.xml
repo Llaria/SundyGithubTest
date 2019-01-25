@@ -8,7 +8,20 @@
     tools:context=".MainActivity">
 
     <Button
+        android:text="发音人下载"
         android:onClick="aclas_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="讯飞测试"
+        android:onClick="speak_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:text="支付宝到账123.33元"
+        android:id="@+id/et_speak"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
