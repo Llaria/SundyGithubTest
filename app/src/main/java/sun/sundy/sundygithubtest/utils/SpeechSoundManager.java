@@ -17,6 +17,7 @@ import static sun.sundy.sundygithubtest.App.app;
 
 /**
  * @author Sundy
+ * 讯飞语音管理类
  * create at 2019/1/22 17:14
  */
 public class SpeechSoundManager {
@@ -36,8 +37,6 @@ public class SpeechSoundManager {
 
     /**
      * 检查是否安装【讯飞语音+】并获取TTS对象
-     * 由于语音播报依赖于【讯飞语音+】所以没有安装就要先安装它才能语音播报
-     * 【讯飞语音+】：包含了语音库,所以我们需要安装它
      * @return 没有安装【讯飞语音+】返回false 安装了返回true
      */
     public boolean initSpeechService() {
@@ -46,6 +45,7 @@ public class SpeechSoundManager {
         if (checkApkExist()) {
             getTTS();
         } else {
+            Log.e(TAG, "initSpeechService: 讯飞语音+ 未安装");
             return false;
         }
         return true;
@@ -68,6 +68,8 @@ public class SpeechSoundManager {
             // 设置参数
             mTts.startSpeaking(speechStr, mTtsListener);
             Toast.makeText(app, speechStr, Toast.LENGTH_LONG).show();
+        }else {
+            Log.e(TAG, "startSpeech: 未初始化成功或文字为空！");
         }
     }
 
@@ -79,7 +81,7 @@ public class SpeechSoundManager {
         mTts.setParameter(SpeechConstant.ENGINE_TYPE,
                 mSharedPreferences.getString("engine_preference", "local"));
         // 设置发音人
-        mTts.setParameter(SpeechSynthesizer.VOICE_NAME,"xiaojing");
+        mTts.setParameter(SpeechSynthesizer.VOICE_NAME,"xiaoyan");
         // 设置语速
         mTts.setParameter(SpeechSynthesizer.SPEED,
                 mSharedPreferences.getString("speed_preference", "40"));
@@ -88,7 +90,7 @@ public class SpeechSoundManager {
                 mSharedPreferences.getString("pitch_preference", "50"));
         // 设置音量
         mTts.setParameter(SpeechSynthesizer.VOLUME,
-                mSharedPreferences.getString("volume_preference", "90"));
+                mSharedPreferences.getString("volume_preference", "100"));
     }
 
     /**
