@@ -1,6 +1,7 @@
 package sun.sundy.sundygithubtest;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,10 +15,11 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import sun.sundy.sundygithubtest.socket.SocketActivity;
 import sun.sundy.sundygithubtest.utils.AclasLSTool;
 
 
-public class AclasTestActivity extends AppCompatActivity {
+public class DahuaActivity extends AppCompatActivity {
 
     final private String tag = "AclasLSToolDemo";
     private AclasLSTool tools = null;
@@ -28,6 +30,7 @@ public class AclasTestActivity extends AppCompatActivity {
     private Button btnInit2 = null;
     private Button btnSendSyn = null;
     private Button btnUnInit = null;
+    private Button btnSocket = null;
     private Timer timer = null;
     private int iBtnTimeout = 30000;
 
@@ -58,7 +61,7 @@ public class AclasTestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aclas_test);
+        setContentView(R.layout.activity_dahua);
         Init();
 
         Log.d(tag, "sdk init complete");
@@ -77,20 +80,20 @@ public class AclasTestActivity extends AppCompatActivity {
                         btnInit.setEnabled(false);
                         btnUnInit.setEnabled(true);
                     }
-                    Toast.makeText(AclasTestActivity.this, "Init " + (msg.arg1 == 1 ? "success " : "failed " + msg.obj.toString()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DahuaActivity.this, "Init " + (msg.arg1 == 1 ? "success " : "failed " + msg.obj.toString()), Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
 
-                    Toast.makeText(AclasTestActivity.this, "Send Plu Data " + (msg.arg1 == 1 ? "success " : "failed ") + msg.obj, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DahuaActivity.this, "Send Plu Data " + (msg.arg1 == 1 ? "success " : "failed ") + msg.obj, Toast.LENGTH_SHORT).show();
                     OperateTimeout(false);
                     break;
                 case 2:
 
-                    Toast.makeText(AclasTestActivity.this, "On error " + msg.obj, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DahuaActivity.this, "On error " + msg.obj, Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
 
-                    Toast.makeText(AclasTestActivity.this, "On send txt syn " + (msg.arg1 == 0 ? "sucess" : "failed"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DahuaActivity.this, "On send txt syn " + (msg.arg1 == 0 ? "sucess" : "failed"), Toast.LENGTH_SHORT).show();
                 case 4:
                     OperateTimeout(false);
                     break;
@@ -111,6 +114,16 @@ public class AclasTestActivity extends AppCompatActivity {
                     btnInit.setEnabled(true);
                     btnSend.setEnabled(false);
                 }
+            }
+        });
+
+        btnSocket = findViewById(R.id.btn_socket);
+        btnSocket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                TcpClient.startClient("10.67.146.111",4001);
+//                TcpClient.startClient("192.168.153.2",6000);
+                startActivity(new Intent(DahuaActivity.this, SocketActivity.class));
             }
         });
 

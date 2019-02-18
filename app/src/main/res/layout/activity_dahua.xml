@@ -20,10 +20,21 @@
         android:lines="1"
         android:maxLength="15"
         android:maxLines="1"
-        android:text="10.67.146.203"
+        android:text="10.67.146.111"
         android:layout_gravity="center_horizontal"
         android:textSize="20dip"/>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dip" />
+
+    <Button
+        android:id="@+id/btn_socket"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:text="大华socket测试" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dip" />
