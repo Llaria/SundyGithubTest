@@ -7,9 +7,22 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"/>
+
+    <Button
+        android:text="顶尖秤测试"
+        android:onClick="aclas_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:text="发音人下载"
-        android:onClick="aclas_test"
+        android:onClick="speaker_download"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -25,4 +38,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:text="支付宝声音测试"
+        android:onClick="alipay_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="大华秤测试"
+        android:onClick="dahua_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
