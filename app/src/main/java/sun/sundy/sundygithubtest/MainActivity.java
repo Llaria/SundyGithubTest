@@ -16,6 +16,7 @@ import com.alipay.iot.sdk.sound.FetchSoundBankCallback;
 import com.alipay.iot.sdk.sound.SoundBank;
 
 import sun.sundy.sundygithubtest.utils.SpeechSoundManager;
+import sun.sundy.sundygithubtest.utils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     // 顶尖秤测试
     public void aclas_test(View view) {
-        startActivity(new Intent(this, AclasTestActivity.class));
+//        startActivity(new Intent(this, AclasTestActivity.class));
+        if (!SpeechSoundManager.getInstance().initSpeechService())
+            ToastUtils.showLazzToast("请确认是否安装讯飞语音+");
     }
 
     public void speak_test(View view) {
