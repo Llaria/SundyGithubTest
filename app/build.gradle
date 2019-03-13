@@ -60,7 +60,7 @@ dependencies {
     implementation files('libs/SpeechApi.jar')
     implementation(name: 'Alipay_UniSDK', ext: 'aar')
     implementation 'com.google.protobuf:protobuf-java:3.5.1'
-    implementation 'com.qihoo360.replugin:replugin-host-lib:2.2.1'
+    implementation 'com.qihoo360.replugin:replugin-host-lib:2.3.1'
 }
 
 apply plugin: 'kotlin-android-extensions'
