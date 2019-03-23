@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Example local unit Test, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
