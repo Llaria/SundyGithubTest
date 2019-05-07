@@ -32,12 +32,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-//    implementation files('libs/AclasLSToolSdk.jar')
+    //    implementation files('libs/AclasLSToolSdk.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation files('libs/SpeechApi.jar')
     implementation(name: 'Alipay_UniSDK', ext: 'aar')
     implementation 'com.google.protobuf:protobuf-java:3.5.1'
-//    implementation files('libs/classes.jar')
+    //    implementation files('libs/classes.jar')
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation files('libs/pl2303driver.jar')
 }
 
 apply plugin: 'kotlin-android-extensions'

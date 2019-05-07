@@ -15,6 +15,7 @@ import com.alipay.iot.sdk.APIManager;
 import com.alipay.iot.sdk.sound.FetchSoundBankCallback;
 import com.alipay.iot.sdk.sound.SoundBank;
 
+import sun.sundy.sundygithubtest.network.OkHttp3Activity;
 import sun.sundy.sundygithubtest.utils.SpeechSoundManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,5 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void dahua_test(View view) {
         startActivity(new Intent(this, DahuaActivity.class));
+    }
+
+    public void okhttp_test(View view) {
+        startActivity(new Intent(this, OkHttp3Activity.class));
     }
 }
