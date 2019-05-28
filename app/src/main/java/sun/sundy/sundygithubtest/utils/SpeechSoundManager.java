@@ -13,7 +13,7 @@ import com.iflytek.speech.SpeechSynthesizer;
 import com.iflytek.speech.SpeechUtility;
 import com.iflytek.speech.SynthesizerListener;
 
-import static sun.sundy.sundygithubtest.App.app;
+import static sun.sundy.sundygithubtest.SundyApplication.app;
 
 /**
  * @author Sundy

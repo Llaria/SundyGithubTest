@@ -55,4 +55,10 @@
         android:onClick="okhttp_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:text="greendao3测试"
+        android:onClick="greendao_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

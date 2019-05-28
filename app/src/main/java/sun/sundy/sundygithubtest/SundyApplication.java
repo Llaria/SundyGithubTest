@@ -5,6 +5,7 @@ import android.app.Application;
 import com.alipay.iot.sdk.APIManager;
 import com.alipay.iot.sdk.InitFinishCallback;
 
+import sun.sundy.sundygithubtest.sql.utils.BizDaoManager;
 import sun.sundy.sundygithubtest.utils.SpeechSoundManager;
 import sun.sundy.sundygithubtest.utils.ToastUtils;
 
@@ -13,9 +14,9 @@ import sun.sundy.sundygithubtest.utils.ToastUtils;
  * Created by sundi on 2017/11/17.
  */
 
-public class App extends Application {
+public class SundyApplication extends Application {
 
-    public static App app;
+    public static SundyApplication app;
 
     @Override
     public void onCreate() {
@@ -39,13 +40,14 @@ public class App extends Application {
         } catch (APIManager.APIInitException e) {
             e.printStackTrace();
         }
+        BizDaoManager.getInstance().init();
     }
 
-    private void initApp(App application) {
+    private void initApp(SundyApplication application) {
         app = application;
     }
 
-    public static App getInstance() {
+    public static SundyApplication getInstance() {
         return app;
     }
 }

@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcelable;
 
-import static sun.sundy.sundygithubtest.App.app;
+import static sun.sundy.sundygithubtest.SundyApplication.app;
 
 
 /**

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
-import static sun.sundy.sundygithubtest.App.app;
+import static sun.sundy.sundygithubtest.SundyApplication.app;
 
 /**
  * 吐司工具类

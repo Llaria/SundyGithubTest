@@ -1,0 +1,29 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+//Copy类型
+task makeJar(type: Copy) {
+    //删除存在的
+    delete 'build/libs/AclasLSToolSdk.jar'
+    //设置拷贝的文件
+    from('build/intermediates/bundles/release/')
+    //打进jar包后的文件目录
+    into('build/libs/')
+    //将classes.jar放入build/libs/目录下
+    //include ,exclude参数来设置过滤
+    //（我们只关心classes.jar这个文件）
+    include('classes.jar')
+    //指定打包的class
+    include "com/test/**/*.class"
+    //重命名
+    rename ('classes.jar', 'AclasLSToolSdk.jar')
+}
+makeJar.dependsOn(build)
+//在终端执行生成JAR包
+
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

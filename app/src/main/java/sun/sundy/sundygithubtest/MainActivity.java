@@ -71,4 +71,8 @@ public class MainActivity extends AppCompatActivity {
     public void okhttp_test(View view) {
         startActivity(new Intent(this, OkHttp3Activity.class));
     }
+
+    public void greendao_test(View view) {
+        startActivity(new Intent(this,SqlActivity.class));
+    }
 }
