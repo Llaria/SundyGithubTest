@@ -60,4 +60,17 @@ public class SqlActivity extends AppCompatActivity {
             }
         }).start();
     }
+
+    public void insert_single(View view) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setName("llaria");
+        userEntity.setAge(1);
+        userEntityDao.insert(userEntity);
+
+        UserEntity userEntity2 = new UserEntity();
+        userEntity2.setName("llaria");
+        userEntity2.setAge(1);
+        userEntityDao.insert(userEntity2);
+
+    }
 }

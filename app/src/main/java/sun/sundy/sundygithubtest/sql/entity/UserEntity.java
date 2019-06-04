@@ -10,10 +10,11 @@ import org.greenrobot.greendao.annotation.Keep;
 public class UserEntity {
     @Id(autoincrement = true)
     private Long id;
+
+
     private String name;
+
     private int age;
-
-
 
 
 

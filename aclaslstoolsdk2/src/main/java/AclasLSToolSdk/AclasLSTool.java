@@ -317,6 +317,8 @@ public class AclasLSTool {
                         } else {
                             Log.e("AclasLSTool", "plu error size:" + iSize);
                         }
+                    }else {
+                        break;
                     }
                 }
                 if (array.size() > 0) {

@@ -22,28 +22,29 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
 //        assertEquals(4, 2 + 2);
 
+//        String weight = "4.009";
+//        System.out.println(Double.valueOf(weight));
+//
+//        System.out.println(1000 * Double.valueOf(weight) + "");
+//        System.out.println(format(1000 * Double.parseDouble(weight),1) + "");
+//
+//        String ipAddress = "10,67,146,99";
+//        String[] ip = ipAddress.split(",");
+//        for (int i = 0; i < ip.length; i++) {
+//            System.out.println(ip[i]);
+//        }
+//
+//        String test = "—";
+//        System.out.println(Arrays.toString(test.getBytes()));
 
-        String weight = "4.009";
-        System.out.println(Double.valueOf(weight));
-
-        System.out.println(1000 * Double.valueOf(weight) + "");
-        System.out.println(format(1000 * Double.parseDouble(weight),1) + "");
-
-        String ipAddress = "10,67,146,99";
-        String[] ip = ipAddress.split(",");
-        for (int i = 0; i < ip.length; i++) {
-            System.out.println(ip[i]);
-        }
-
-        String test = "—";
-        System.out.println(Arrays.toString(test.getBytes()));
-
-        getTotalAreaCode("非法名称");
+        getTotalAreaCode("!");
+        checkNum("700002201500000984");
     }
 
     private String getTotalAreaCode(String name) {
         StringBuilder stringBuilder = new StringBuilder();
         char[] nameChar = name.toCharArray();
+        System.out.println("nameChar：" + Arrays.toString(nameChar));
         for (char c : nameChar) {
             if (isChinese(c))
                 stringBuilder.append(toAreaCode(String.valueOf(c), true));
@@ -55,7 +56,7 @@ public class ExampleUnitTest {
             System.out.println("存在非法字符");
             return "";
         }else {
-            System.out.println("code值" + code);
+            System.out.println("code值：" + code);
             return code;
         }
     }
@@ -65,8 +66,10 @@ public class ExampleUnitTest {
         byte[] bs;
         try {
             bs = word.getBytes("GB2312");
+            System.out.println("bs字节数组（GB2312编码）：" + Arrays.toString(bs));
             for (byte b : bs) {
                 int code = Integer.parseInt(Integer.toHexString(b & 0xFF), 16);
+                System.out.println("单个字符的code值：" + code);
                 if (isChina) {
                     int temp = code - 0x80 - 0x20;
                     if (temp < 10) {
@@ -75,7 +78,7 @@ public class ExampleUnitTest {
                         areaCode.append(temp);
                     }
                 } else {
-                    int temp = code - 32;
+                    int temp = code - 0x20;
                     if (temp < 10) {
                         areaCode.append("030").append(temp);
                     } else {
@@ -100,7 +103,25 @@ public class ExampleUnitTest {
                 || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION;
     }
 
-
+    /**
+     * 散称打印条码规则校验
+     */
+    public static boolean checkNum(String barcode) {
+        int odd = 0;
+        int even = 0;
+        for (int i = 0; i < barcode.length() - 1; i++) {
+            int num = Integer.parseInt(String.valueOf(barcode.charAt(i)));
+            if ((i + 1) % 2 == 0)
+                odd = odd + num;
+            else
+                even = even + num;
+        }
+        int amount = odd * 3 + even;
+        int Z = (amount / 10 + 1) * 10 - amount;
+        boolean isCheckPass = String.valueOf(Z == 10 ? 0 : Z).equals(String.valueOf(barcode.charAt(barcode.length() - 1)));
+        System.out.println(barcode + "======》》》校验码：" + (Z == 10 ? 0 : Z) + "校验是否通过：" + isCheckPass);
+        return isCheckPass;
+    }
 
 
 
