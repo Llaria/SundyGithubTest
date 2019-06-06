@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.Keep;
 
-@Entity(indexes = {@Index(value = "name,age",unique = true)})
+@Entity(indexes = {@Index(value = "name,age",unique = false)})
 public class UserEntity {
     @Id(autoincrement = true)
     private Long id;

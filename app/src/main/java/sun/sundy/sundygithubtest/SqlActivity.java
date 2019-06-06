@@ -9,13 +9,16 @@ import org.greenrobot.greendao.query.QueryBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import sun.sundy.sundygithubtest.sql.entity.CodeEntity;
 import sun.sundy.sundygithubtest.sql.entity.UserEntity;
+import sun.sundy.sundygithubtest.sql.gen.CodeEntityDao;
 import sun.sundy.sundygithubtest.sql.gen.UserEntityDao;
 import sun.sundy.sundygithubtest.sql.utils.BizDaoManager;
 
 public class SqlActivity extends AppCompatActivity {
 
     private UserEntityDao userEntityDao;
+    private CodeEntityDao codeEntityDao;
     private long time;
 
     @Override
@@ -23,6 +26,7 @@ public class SqlActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sql);
         userEntityDao = BizDaoManager.getInstance().getDaoSession().getUserEntityDao();
+        codeEntityDao = BizDaoManager.getInstance().getDaoSession().getCodeEntityDao();
     }
 
     public void start(View view) {
@@ -63,8 +67,8 @@ public class SqlActivity extends AppCompatActivity {
 
     public void insert_single(View view) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setName("llaria");
-        userEntity.setAge(1);
+        userEntity.setName("Sundy33");
+        userEntity.setAge(33);
         userEntityDao.insert(userEntity);
 
         UserEntity userEntity2 = new UserEntity();
@@ -72,5 +76,15 @@ public class SqlActivity extends AppCompatActivity {
         userEntity2.setAge(1);
         userEntityDao.insert(userEntity2);
 
+        CodeEntity codeEntity = new CodeEntity();
+        codeEntity.setIndex(1);
+        codeEntity.setIndexName("一");
+        codeEntityDao.insert(codeEntity);
+
+    }
+
+    public void query_all(View view) {
+        System.out.println("全部结果=======>>>>>>>>>>" + userEntityDao.loadAll().toString());
+        System.out.println("全部结果=======>>>>>>>>>>" + codeEntityDao.loadAll().toString());
     }
 }

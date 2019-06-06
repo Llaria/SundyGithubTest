@@ -8,8 +8,8 @@ android {
         applicationId "sun.sundy.sundygithubtest"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "5.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -45,12 +45,13 @@ dependencies {
     implementation files('libs/pl2303driver.jar')
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation project(':AclasLSToolSdk')
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.7'
 }
 
 apply plugin: 'kotlin-android-extensions'
 
 greendao {
-    schemaVersion 1//数据库版本号
+    schemaVersion 5//数据库版本号
     daoPackage 'sun.sundy.sundygithubtest.sql.gen'//设置DaoMaster、DaoSession、Dao包名
     targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
     //targetGenDirTest：设置生成单元测试目录

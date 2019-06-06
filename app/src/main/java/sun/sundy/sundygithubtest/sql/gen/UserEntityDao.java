@@ -46,7 +46,7 @@ public class UserEntityDao extends AbstractDao<UserEntity, Long> {
                 "\"NAME\" TEXT," + // 1: name
                 "\"AGE\" INTEGER NOT NULL );"); // 2: age
         // Add Indexes
-        db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_USER_ENTITY_NAME_AGE ON \"USER_ENTITY\"" +
+        db.execSQL("CREATE INDEX " + constraint + "IDX_USER_ENTITY_NAME_AGE ON \"USER_ENTITY\"" +
                 " (\"NAME\" ASC,\"AGE\" ASC);");
     }
 

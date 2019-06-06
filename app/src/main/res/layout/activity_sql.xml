@@ -14,7 +14,7 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:text="开始"
+        android:text="查询"
         android:onClick="start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -29,6 +29,12 @@
     <Button
         android:text="单条插入"
         android:onClick="insert_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="查询全部"
+        android:onClick="query_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
