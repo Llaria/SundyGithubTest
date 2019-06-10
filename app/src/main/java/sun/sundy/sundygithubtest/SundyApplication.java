@@ -1,6 +1,7 @@
 package sun.sundy.sundygithubtest;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.alipay.iot.sdk.APIManager;
 import com.alipay.iot.sdk.InitFinishCallback;
@@ -50,6 +51,7 @@ public class SundyApplication extends Application {
             });
         } catch (APIManager.APIInitException e) {
             e.printStackTrace();
+            Log.d("dd", "onCreate: ");
         }
         if (WeightPreference.getInstance(app).isFirstIn()){
             String dbPath = FileUtil.SDPATH + BizDaoHelper.DB_NAME;
