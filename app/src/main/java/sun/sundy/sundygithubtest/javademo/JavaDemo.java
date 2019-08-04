@@ -6,8 +6,6 @@ public class JavaDemo {
     private static final String TAG = "test";
 
     public static void main(String[] args) {
-
-
         try {
             ThreeThread threeThread = new ThreeThread();
 //            threeThread.setDaemon(true);
@@ -94,11 +92,7 @@ public class JavaDemo {
 //        countThread9.start();
 //        countThread10.start();
 //        countThread11.start();
-
-
     }
-
-
 }
 
 class ThreeThread extends Thread{
