@@ -14,6 +14,11 @@
         android:textSize="20sp"
         android:textColor="@color/colorAccent"/>
 
+    <EditText
+        android:id="@+id/my_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:text="顶尖秤测试"
         android:onClick="aclas_test"
@@ -35,6 +40,8 @@
     <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
         android:text="支付宝到账123.33元"
         android:id="@+id/et_speak"
+        app:showSoftKeyboard="false"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

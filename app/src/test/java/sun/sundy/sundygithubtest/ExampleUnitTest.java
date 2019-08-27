@@ -64,6 +64,25 @@ public class ExampleUnitTest {
         System.out.println(firstBarcode.trim());
         System.out.println(Arrays.toString(firstBarcode.getBytes()));
 
+
+        checkNum1("134586242427785632");
+    }
+
+    public static boolean checkNum1(String barcode) {
+        int odd = 0;
+        int even = 0;
+        for (int i = 0; i < barcode.length() - 1; i++) {
+            int num = Integer.parseInt(String.valueOf(barcode.charAt(i)));
+            if ((i + 1) % 2 == 0)
+                odd = odd + num;
+            else
+                even = even + num;
+        }
+        int amount = odd * 3 + even;
+        int Z = (amount / 10 + 1) * 10 - amount;
+        boolean isCheckPass = String.valueOf(Z == 10 ? 0 : Z).equals(String.valueOf(barcode.charAt(barcode.length() - 1)));
+        System.out.println(barcode + "======》》》校验码：" + (Z == 10 ? 0 : Z) + "校验是否通过：" + isCheckPass);
+        return isCheckPass;
     }
 
 

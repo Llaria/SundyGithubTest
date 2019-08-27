@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alipay.iot.sdk.APIManager;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private DeLBackEditText editText;
     private TextView tvTest;
     private String barcode = "";
+    private EditText myEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         tvTest = findViewById(R.id.tv_test);
+
+        myEditText = findViewById(R.id.my_edit);
+        myEditText.setInputType(InputType.TYPE_NULL);
+
+
+
+
+
     }
 
 //    @Override

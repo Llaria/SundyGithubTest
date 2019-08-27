@@ -119,6 +119,8 @@ public class StdEditText extends android.support.v7.widget.AppCompatEditText {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
+        SoftInputTools.hideSoftInput(this);
+        System.out.println("====-============》》》》》");
         if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) { // 点击ok
             onOkKeyClick();
             cancelLongPress();
