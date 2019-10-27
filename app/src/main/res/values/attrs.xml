@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- 方便复制 -->
+    <!-- 
+            后面的com.example.kaicomframeworksample为客户应用的包名
+    xmlns:kaicom="http://schemas.android.com/apk/res/com.example.kaicomframeworksample"
+    
+    kaicom:maxByteLength="12"
+    kaicom:rawInputType="number"
+    kaicom:showSoftKeyboard="false"
+    kaicom:hideImeWithLostFocus="true"
+    
+    kaicom:interceptKeyUp="true"
+    
+           在style中的写法：
+    <item name="com.example.kaicomframeworksample:interceptKeyUp">true</item>
+    
+     -->
+	
+    <!-- 编辑框属性 -->
+    <declare-styleable name="StdEditText">
+        <!-- 字符限制 -->
+        <attr name="maxByteLength" format="integer" />
+        <!-- 是否可弹出软键盘，默认为可以(true) -->
+        <attr name="showSoftKeyboard" format="boolean"/>
+        <!-- 控件失去焦点时，是否隐藏软键盘,默认为false -->
+        <attr name="hideImeWithLostFocus" format="boolean"/>
+        <!-- 默认输入法 -->
+        <attr name="rawInputType" format="integer">
+            <!-- 默认数字，实际类型是InputType.TYPE_CLASS_PHONE -->
+            <enum name="number" value="0x00000003" />
+            <enum name="text" value="0x00000001" />
+        </attr>
+
+    </declare-styleable>
+    
+    <declare-styleable name="DelBackEditText">
+        
+        <!-- 需要拦截的按键 -->
+        <attr name="interceptKeyUp" format="boolean"/>
+        <attr name="interceptKeyDown" format="boolean"/>
+        <attr name="interceptKeyLeft" format="boolean"/>
+        <attr name="interceptKeyRight" format="boolean"/>
+        
+    </declare-styleable>
+
+</resources>

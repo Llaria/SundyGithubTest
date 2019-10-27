@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,17 +39,110 @@ public class ExampleUnitTest {
 //        String test = "—";
 //        System.out.println(Arrays.toString(test.getBytes()));
 
-        String order = "!0V0001A0002214000970000000000807000000000000000000000000010610071220131830192440B4102193803190323C4662D4662E";
-        System.out.println(Arrays.toString(order.getBytes()));
+//        String order = "!0V0001A0002214000970000000000807000000000000000000000000010610071220131830192440B4102193803190323C4662D4662E";
+//        System.out.println(Arrays.toString(order.getBytes()));
+//
+//        byte[] orderByte = {33, 48, 86, 48, 50, 56, 57, 65, 48, 48, 48, 50, 52, 52, 48, 48, 48, 48, 55, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 56, 48, 55,
+//                48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49, 48, 54, 49, 48, 48, 55, 49, 50, 50, 48,
+//                49, 51, 49, 56, 51, 48, 49, 57, 50, 52, 52, 48, 66, 50, 51, 48, 50, 50, 51, 48, 50, 50, 51, 48, 50, 50, 52, 57, 48, 67, 52, 54, 54, 50, 68, 52, 54, 54, 50, 69, 13, 10, 3};
+//        System.out.println(new String(orderByte));
+//
+//        getTotalAreaCode("散称37");
+//        checkNum("700002201500000984");
+//
+//        System.out.println( "".replace("Z", "0"));
+//
+//
+//        System.out.println(getCutTwoPointMoney3(-1.999999999));
+//        System.out.println(getCutTwoPointMoney3(.11));
+//        System.out.println(getCutTwoPointMoney3(00.9923231));
+//        System.out.println(getCutTwoPointMoney3(.45555));
+//        System.out.println(getCutTwoPointMoney3(76.38));
 
-        byte[] orderByte = {33, 48, 86, 48, 50, 56, 57, 65, 48, 48, 48, 50, 52, 52, 48, 48, 48, 48, 55, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 56, 48, 55,
-                48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49, 48, 54, 49, 48, 48, 55, 49, 50, 50, 48,
-                49, 51, 49, 56, 51, 48, 49, 57, 50, 52, 52, 48, 66, 50, 51, 48, 50, 50, 51, 48, 50, 50, 51, 48, 50, 50, 52, 57, 48, 67, 52, 54, 54, 50, 68, 52, 54, 54, 50, 69, 13, 10, 3};
-        System.out.println(new String(orderByte));
+        int charCode = 0;
+        String firstBarcode = (char)charCode + "666";
+        System.out.println(firstBarcode.trim());
+        System.out.println(Arrays.toString(firstBarcode.getBytes()));
 
-        getTotalAreaCode("散称37");
-        checkNum("700002201500000984");
+
+        checkNum1("134586242427785632");
     }
+
+    public static boolean checkNum1(String barcode) {
+        int odd = 0;
+        int even = 0;
+        for (int i = 0; i < barcode.length() - 1; i++) {
+            int num = Integer.parseInt(String.valueOf(barcode.charAt(i)));
+            if ((i + 1) % 2 == 0)
+                odd = odd + num;
+            else
+                even = even + num;
+        }
+        int amount = odd * 3 + even;
+        int Z = (amount / 10 + 1) * 10 - amount;
+        boolean isCheckPass = String.valueOf(Z == 10 ? 0 : Z).equals(String.valueOf(barcode.charAt(barcode.length() - 1)));
+        System.out.println(barcode + "======》》》校验码：" + (Z == 10 ? 0 : Z) + "校验是否通过：" + isCheckPass);
+        return isCheckPass;
+    }
+
+
+    private static String getCutTwoPointMoney3(double value) {
+        DecimalFormat dFormat = new DecimalFormat("0.00");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        BigDecimal b = new BigDecimal(value);
+        return dFormat.format(b.setScale(2, RoundingMode.DOWN).doubleValue());
+    }
+
+    /**
+     * 获取截取2位小数的金额，盘点单专用
+     * @param price 金额，盘点单一般是9位
+     * @return 截取2位小数后的金额
+     */
+    public static String getDoubleCutTwoPointPrice2(Double price) {
+        return (price == null ? "计算中" : getCutTwoPointMoney(price));
+    }
+
+
+    private static String getCutTwoPointMoney2(double value) {
+        DecimalFormat dFormat = new DecimalFormat("#.0000");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        String money = dFormat.format(value);
+        String frist = money.substring(0, 1);
+        if (".".equals(frist)) {
+            return "0" + money.substring(0, 3);
+        }
+        int index = getIndex(money, '.');
+        if (index == -1) {
+            return "0.0";
+        }
+        return money.substring(0, index + 3);
+    }
+
+    private static String getCutTwoPointMoney(double value) {
+        DecimalFormat dFormat = new DecimalFormat("#.0000");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        String money = dFormat.format(value);
+        String frist = money.substring(0, 1);
+        if (".".equals(frist)) {
+            return "0" + money.substring(0, 3);
+        }
+        int index = getIndex(money, '.');
+        if (index == -1) {
+            return "0.0";
+        }
+        return money.substring(0, index + 3);
+    }
+
+    private static int getIndex(String str, char ch) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '.') {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 
     private String getTotalAreaCode(String name) {
         StringBuilder stringBuilder = new StringBuilder();
