@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".SundyApplication"
@@ -16,7 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SqlActivity"></activity>
+        <activity android:name=".scan.ZxingScanActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeScan" />
+        <activity
+            android:name=".scan.ZbarScanActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeScan" />
+        <activity
+            android:name=".design.DesignActivity"
+            android:label="材料设计" />
+        <activity android:name=".SqlActivity" />
         <activity android:name=".network.OkHttp3Activity" />
         <activity
             android:name=".MainActivity"
