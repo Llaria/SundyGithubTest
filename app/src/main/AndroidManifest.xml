@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".camera.CameraActivity"></activity>
+        <activity android:name=".autoclick.AutoClickActivity"></activity>
+        <activity android:name=".camera.CameraActivity" />
         <activity
             android:name=".scan.ZxingScanActivity"
             android:screenOrientation="portrait"

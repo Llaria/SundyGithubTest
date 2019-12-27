@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.alipay.iot.sdk.APIManager;
 import com.alipay.iot.sdk.InitFinishCallback;
-import com.best.android.bscan.core.BScan;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 
@@ -62,9 +61,9 @@ public class SundyApplication extends Application {
         decodeHints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
         decodeHints.put(DecodeHintType.TRY_HARDER, 1);
         //是否先拿原图直接通过zxing进行识别
-        BScan.TRY_SPEED = false;
-        BScan.decodeHints = decodeHints;
-        BScan.init(this);
+//        BScan.TRY_SPEED = false;
+//        BScan.decodeHints = decodeHints;
+//        BScan.init(this);
 
 
 //        if (WeightPreference.getInstance(app).isFirstIn()){

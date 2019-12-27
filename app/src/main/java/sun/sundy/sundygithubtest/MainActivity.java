@@ -22,6 +22,7 @@ import com.alipay.iot.sdk.sound.SoundBank;
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
+import sun.sundy.sundygithubtest.autoclick.AutoClickActivity;
 import sun.sundy.sundygithubtest.camera.CameraActivity;
 import sun.sundy.sundygithubtest.design.DesignActivity;
 import sun.sundy.sundygithubtest.network.OkHttp3Activity;
@@ -204,5 +205,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void camera_test(View view) {
         startActivity(new Intent(this, CameraActivity.class));
+    }
+
+    public void auto_click_test(View view) {
+        startActivity(new Intent(this, AutoClickActivity.class));
     }
 }
