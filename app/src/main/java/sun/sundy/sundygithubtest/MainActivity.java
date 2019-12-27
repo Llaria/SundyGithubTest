@@ -22,6 +22,7 @@ import com.alipay.iot.sdk.sound.SoundBank;
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
+import sun.sundy.sundygithubtest.camera.CameraActivity;
 import sun.sundy.sundygithubtest.design.DesignActivity;
 import sun.sundy.sundygithubtest.network.OkHttp3Activity;
 import sun.sundy.sundygithubtest.scan.ZbarScanActivity;
@@ -199,5 +200,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void zxing_test(View view) {
         startActivity(new Intent(this, ZxingScanActivity.class));
+    }
+
+    public void camera_test(View view) {
+        startActivity(new Intent(this, CameraActivity.class));
     }
 }

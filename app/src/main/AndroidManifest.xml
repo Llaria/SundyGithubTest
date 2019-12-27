@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".scan.ZxingScanActivity"
+        <activity android:name=".camera.CameraActivity"></activity>
+        <activity
+            android:name=".scan.ZxingScanActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeScan" />
         <activity

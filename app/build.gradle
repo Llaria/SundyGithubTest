@@ -86,6 +86,9 @@ dependencies {
     implementation 'com.lovedise:permissiongen:0.0.6'
     implementation 'cn.bingoogolapple:bga-flowlayout:1.0.0@aar'
     implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.best.android.bscan:core:0.1.1@aar'
+    implementation 'com.best.android.opencv:opencvsimple:0.0.1@aar'
+
 }
 
 apply plugin: 'kotlin-android-extensions'

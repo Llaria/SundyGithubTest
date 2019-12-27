@@ -4,9 +4,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.hardware.Camera;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 
+import com.best.android.bscan.core.decoder.BDecoder;
+import com.best.android.bscan.core.decoder.DecodeResult;
+import com.best.android.bscan.core.util.DL;
+import com.best.android.bscan.core.util.SL;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -17,13 +23,17 @@ import com.google.zxing.ResultPoint;
 import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.google.zxing.common.HybridBinarizer;
 
+import org.opencv.android.Utils;
+import org.opencv.core.Mat;
+
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
-import sun.sundy.sundygithubtest.scan.core.SundyLogUtil;
 import sun.sundy.sundygithubtest.scan.core.BarcodeType;
 import sun.sundy.sundygithubtest.scan.core.QRCodeView;
 import sun.sundy.sundygithubtest.scan.core.ScanResult;
+import sun.sundy.sundygithubtest.scan.core.SundyLogUtil;
 
 
 public class ZXingView extends QRCodeView {
@@ -82,6 +92,47 @@ public class ZXingView extends QRCodeView {
         return new ScanResult(QRCodeDecoder.syncDecodeQRCode(bitmap));
     }
 
+    private BDecoder bDecoder = new BDecoder();
+    private DecodeResult decodeCell(final Camera camera, final byte[] data, int left, int top, int capturewidth, int captureheight) {
+        try {
+            Date d1 = new Date();
+            Camera.Size previewSize = null;
+            DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+            if(previewSize == null){
+                previewSize = camera.getParameters().getPreviewSize();
+            }
+
+            //进行屏幕到preview的投影换算, 默认竖屏
+            int capLeft = left * previewSize.height / displayMetrics.widthPixels ;
+            int capTop = top * previewSize.width / displayMetrics.heightPixels ;
+            int capWidth = capturewidth * previewSize.height /displayMetrics.widthPixels ;
+            int capHeight = captureheight * previewSize.width / displayMetrics.heightPixels ;
+
+            byte[] subRect = YUV420ToGray(data, previewSize.width, previewSize.height, capLeft, capTop, capWidth, capHeight);
+//            byte[] subRect = YUV420ToGray(data, previewSize.width, previewSize.height, left, top, capturewidth, captureheight);
+            Date d2 = new Date();
+            DL.w("","===========YUV420ToGray use time:" + (d2.getTime() - d1.getTime()));
+
+            DecodeResult decodeResult = bDecoder.decode(subRect,capWidth,capHeight);
+            Mat showMat = decodeResult.souceMat;
+            if (null != showMat){
+                Bitmap bitmap = Bitmap.createBitmap(decodeResult.souceMat.width(), decodeResult.souceMat.height(), Bitmap.Config.RGB_565);
+                Utils.matToBitmap(decodeResult.souceMat, bitmap);
+                imageView.setImageBitmap(bitmap);
+            }else {
+                System.out.println("============无show");
+            }
+
+
+            Date df = new Date();
+            SL.w("","========decodeCell total use time:" + (df.getTime() - d1.getTime()));
+            return decodeResult;
+        } catch (Exception e) {
+            SL.e("", "======decodeCell error", e);
+            return new DecodeResult();
+        }
+    }
+
     @Override
     protected ScanResult processData(byte[] data, int width, int height, boolean isRetry) {
         SundyLogUtil.d("每一帧的字节数组：" + Arrays.toString(data));
@@ -93,11 +144,21 @@ public class ZXingView extends QRCodeView {
             scanBoxAreaRect = mScanBoxView.getScanBoxAreaRect(height);
 
             if (scanBoxAreaRect != null) {
-//                data = YUV420ToGray(data,width,height,scanBoxAreaRect.left, scanBoxAreaRect.top, scanBoxAreaRect.width(), scanBoxAreaRect.height());
-                source = new PlanarYUVLuminanceSource(data, width, height, scanBoxAreaRect.left, scanBoxAreaRect.top, scanBoxAreaRect.width(),
-                        scanBoxAreaRect.height(), false);
+                SundyLogUtil.d("==========带框裁剪Zxing算法" + scanBoxAreaRect.left + "========"  + scanBoxAreaRect.top + "========"  + scanBoxAreaRect.width() + "========"  + scanBoxAreaRect.height());
+                DecodeResult decodeResult = decodeCell(mCamera, data, scanBoxAreaRect.left, scanBoxAreaRect.top, scanBoxAreaRect.width(), scanBoxAreaRect.height());
+
+
+//                source = new PlanarYUVLuminanceSource(data, width, height, scanBoxAreaRect.left, scanBoxAreaRect.top, scanBoxAreaRect.width(), scanBoxAreaRect.height(), false);
+
+                if (decodeResult.zxingResult == null || TextUtils.isEmpty(decodeResult.zxingResult.getText())) {
+                    SundyLogUtil.d("========带框裁剪Zxing算法识别失败");
+                    return null;
+                }else {
+                    SundyLogUtil.d("========带框裁剪Zxing算法识别成功");
+                    return new ScanResult(decodeResult.zxingResult.getText());
+                }
+
             } else {
-//                data = YUV420ToGray(data,width,height,0, 0, width, height);
                 source = new PlanarYUVLuminanceSource(data, width, height, 0, 0, width, height, false);
             }
 

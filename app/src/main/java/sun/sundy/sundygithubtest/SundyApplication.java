@@ -5,7 +5,15 @@ import android.util.Log;
 
 import com.alipay.iot.sdk.APIManager;
 import com.alipay.iot.sdk.InitFinishCallback;
+import com.best.android.bscan.core.BScan;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.DecodeHintType;
 
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.HashMap;
+
+import sun.sundy.sundygithubtest.utils.SoundManager;
 import sun.sundy.sundygithubtest.utils.SpeechSoundManager;
 import sun.sundy.sundygithubtest.utils.ToastUtils;
 
@@ -22,7 +30,7 @@ public class SundyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initApp(this);
-
+        SoundManager.getInstance().initSoundPool();
         if (!SpeechSoundManager.getInstance().initSpeechService())
             ToastUtils.showLazzToast("请确认是否安装讯飞语音+");
 
@@ -41,6 +49,24 @@ public class SundyApplication extends Application {
             e.printStackTrace();
             Log.d("dd", "onCreate: ");
         }
+
+
+
+        HashMap<DecodeHintType, Object> decodeHints = new HashMap();
+        Collection<BarcodeFormat> decodeFormats = EnumSet.noneOf(BarcodeFormat.class);
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.EAN_13));
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.EAN_8));
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.CODE_128));
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.QR_CODE));
+        decodeHints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
+        decodeHints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
+        decodeHints.put(DecodeHintType.TRY_HARDER, 1);
+        //是否先拿原图直接通过zxing进行识别
+        BScan.TRY_SPEED = false;
+        BScan.decodeHints = decodeHints;
+        BScan.init(this);
+
+
 //        if (WeightPreference.getInstance(app).isFirstIn()){
 //            String dbPath = FileUtil.SDPATH + BizDaoHelper.DB_NAME;
 //            Database database = new BizDaoHelper(app,dbPath).getWritableDb();

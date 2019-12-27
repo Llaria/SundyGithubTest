@@ -16,6 +16,7 @@ import sun.sundy.sundygithubtest.scan.core.BarcodeType;
 import sun.sundy.sundygithubtest.scan.core.QRCodeView;
 import sun.sundy.sundygithubtest.scan.zbar.BarcodeFormat;
 import sun.sundy.sundygithubtest.scan.zbar.ZBarView;
+import sun.sundy.sundygithubtest.utils.SoundManager;
 
 public class ZbarScanActivity extends AppCompatActivity implements QRCodeView.Delegate {
 
@@ -23,6 +24,7 @@ public class ZbarScanActivity extends AppCompatActivity implements QRCodeView.De
     private static final int REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666;
 
     private ZBarView mZBarView;
+    private long lastTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,8 @@ public class ZbarScanActivity extends AppCompatActivity implements QRCodeView.De
         super.onStart();
         mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
 //        mZBarView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT); // 打开前置摄像头开始预览，但是并未开始识别
-
+        mZBarView.setType(BarcodeType.ONE_DIMENSION, null); // 只识别一维条码
+        mZBarView.getScanBoxView().setOnlyDecodeScanBoxArea(true); // 仅识别扫描框中的码
         mZBarView.startSpotAndShowRect(); // 显示扫描框，并开始识别
     }
 
@@ -62,11 +65,14 @@ public class ZbarScanActivity extends AppCompatActivity implements QRCodeView.De
 
     @Override
     public void onScanQRCodeSuccess(String result) {
-        Log.i(TAG, "result:" + result);
-        setTitle("扫描结果为：" + result);
-        vibrate();
 
-        mZBarView.startSpot(); // 开始识别
+        Log.i(TAG, "result:" + result);
+        setTitle("Zbar耗时" + (System.currentTimeMillis() - lastTime) + "ms：" + result);
+        lastTime = System.currentTimeMillis();
+        vibrate();
+        SoundManager.getInstance().success();
+        // 开始识别
+        mZBarView.startSpot();
     }
 
     @Override

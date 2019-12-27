@@ -48,6 +48,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="camera_test"
+                android:text="Camera测试" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="md_test"
                 android:text="材料设计测试" />
 

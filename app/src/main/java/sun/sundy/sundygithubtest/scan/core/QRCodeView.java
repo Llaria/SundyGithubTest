@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import sun.sundy.sundygithubtest.R;
@@ -33,6 +34,7 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
     private long mLastPreviewFrameTime = 0;
     private ValueAnimator mAutoZoomAnimator;
     private long mLastAutoZoomTime = 0;
+    public ImageView imageView;
 
     // 上次环境亮度记录的时间戳
     private long mLastAmbientBrightnessRecordTime = System.currentTimeMillis();
@@ -72,6 +74,12 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
         layoutParams.addRule(RelativeLayout.ALIGN_TOP, mCameraPreview.getId());
         layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, mCameraPreview.getId());
         addView(mScanBoxView, layoutParams);
+        imageView = new ImageView(context);
+        LayoutParams layoutParams1 = new LayoutParams(context,attrs);
+        layoutParams1.height = 100;
+        layoutParams1.width = 100;
+        layoutParams1.addRule(RelativeLayout.ALIGN_BOTTOM,mCameraPreview.getId());
+        addView(imageView,layoutParams);
 
         mPaint = new Paint();
         mPaint.setColor(getScanBoxView().getCornerColor());
@@ -390,6 +398,8 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
     protected abstract ScanResult processBitmapData(Bitmap bitmap);
 
     void onPostParseData(ScanResult scanResult) {
+        if (null != scanResult.getBitmap())
+        imageView.setImageBitmap(scanResult.getBitmap());
         if (!mSpotAble) {
             return;
         }

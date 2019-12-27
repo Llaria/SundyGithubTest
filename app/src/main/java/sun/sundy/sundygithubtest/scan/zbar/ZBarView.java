@@ -11,6 +11,10 @@ import net.sourceforge.zbar.Image;
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Symbol;
 
+import org.opencv.android.Utils;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
@@ -93,14 +97,33 @@ public class ZBarView extends QRCodeView {
         Image barcode = new Image(width, height, "Y800");
 
         Rect scanBoxAreaRect = mScanBoxView.getScanBoxAreaRect(height);
+        Bitmap bitmap = null;
         if (scanBoxAreaRect != null && !isRetry && scanBoxAreaRect.left + scanBoxAreaRect.width() <= width
                 && scanBoxAreaRect.top + scanBoxAreaRect.height() <= height) {
             barcode.setCrop(scanBoxAreaRect.left, scanBoxAreaRect.top, scanBoxAreaRect.width(), scanBoxAreaRect.height());
-        }
 
+            System.out.println("==========Zbar截取框生效" + mCamera.getParameters().getPreviewSize().width + "===" + mCamera.getParameters().getPreviewSize().height + "lllll" +
+                    scanBoxAreaRect.left + "===" + scanBoxAreaRect.top + " =====" + scanBoxAreaRect.width() + "====" + scanBoxAreaRect.height() + "====" + scanBoxAreaRect.right);
+            Mat rawMat = new Mat(mCamera.getParameters().getPreviewSize().width ,mCamera.getParameters().getPreviewSize().height , CvType.CV_8UC1);//yuv->gray
+            rawMat.put(0, 0, data);
+            Mat subMat = rawMat.submat(scanBoxAreaRect.left, scanBoxAreaRect.left + scanBoxAreaRect.width(),scanBoxAreaRect.top, scanBoxAreaRect.top + scanBoxAreaRect.height());//subMat
+//            Mat trans = new Mat(scanBoxAreaRect.height(), scanBoxAreaRect.width(), CvType.CV_8UC1);//trans
+//            Core.transpose(subMat, trans);
+//            Mat flip = new Mat(scanBoxAreaRect.height(), scanBoxAreaRect.width(), CvType.CV_8UC1);  //flip
+//            Core.flip(subMat, flip, 1);
+//            byte[] bytes = new byte[flip.rows() * flip.cols() * flip.channels()];
+//            flip.get(0, 0, bytes);
+
+            bitmap = Bitmap.createBitmap(subMat.width(), subMat.height(), Bitmap.Config.RGB_565);
+            Utils.matToBitmap(subMat, bitmap);
+
+        }
         barcode.setData(data);
         String result = processData(barcode);
-        return new ScanResult(result);
+        ScanResult scanResult = new ScanResult(result);
+        scanResult.setBitmap(bitmap);
+
+        return scanResult;
     }
 
     private String processData(Image barcode) {
