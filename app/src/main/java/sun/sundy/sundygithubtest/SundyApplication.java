@@ -1,6 +1,11 @@
 package sun.sundy.sundygithubtest;
 
 import android.app.Application;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.util.Log;
 
 import com.alipay.iot.sdk.APIManager;
@@ -12,6 +17,7 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashMap;
 
+import sun.sundy.sundygithubtest.service.AutoClickService;
 import sun.sundy.sundygithubtest.utils.SoundManager;
 import sun.sundy.sundygithubtest.utils.SpeechSoundManager;
 import sun.sundy.sundygithubtest.utils.ToastUtils;
@@ -49,7 +55,7 @@ public class SundyApplication extends Application {
             Log.d("dd", "onCreate: ");
         }
 
-
+        bindUploadService();
 
         HashMap<DecodeHintType, Object> decodeHints = new HashMap();
         Collection<BarcodeFormat> decodeFormats = EnumSet.noneOf(BarcodeFormat.class);
@@ -96,4 +102,27 @@ public class SundyApplication extends Application {
     public static SundyApplication getInstance() {
         return app;
     }
+
+    /**
+     * 启动服务
+     */
+    public void bindUploadService() {
+        Intent intent = new Intent(this, AutoClickService.class);
+        bindService(intent, conn, Context.BIND_AUTO_CREATE);
+    }
+
+    private AutoClickService chuangXinService;
+    private ServiceConnection conn = new ServiceConnection() {
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            chuangXinService = null;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            AutoClickService.ChuangXinServiceBinder binder = (AutoClickService.ChuangXinServiceBinder) service;
+            chuangXinService = binder.getService();
+        }
+    };
 }

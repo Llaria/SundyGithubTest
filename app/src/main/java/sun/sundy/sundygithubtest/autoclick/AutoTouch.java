@@ -70,4 +70,26 @@ public class AutoTouch {
             }
         }).start();
     }
+
+    public void autoClick(final double x, final double y) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 线程睡眠0.3s
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // 利用ProcessBuilder执行shell命令
+                String[] order = { "input", "tap", "" + x, "" + y };
+                try {
+                    new ProcessBuilder(order).start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 }

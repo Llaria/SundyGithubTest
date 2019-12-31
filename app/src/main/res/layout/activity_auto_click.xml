@@ -13,9 +13,14 @@
         android:layout_height="200dp" />
 
     <Button
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="30dp"
         android:text="开始"
         android:id="@+id/btn_start"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iv_print"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

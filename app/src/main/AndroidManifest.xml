@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".autoclick.AutoClickActivity"></activity>
+        <activity android:name=".autoclick.OcrActivity"></activity>
+        <activity android:name=".autoclick.AutoClickActivity" />
         <activity android:name=".camera.CameraActivity" />
         <activity
             android:name=".scan.ZxingScanActivity"
@@ -45,6 +46,7 @@
         <activity android:name=".AclasTestActivity" />
         <activity android:name=".socket.SocketActivity" />
         <activity android:name=".DahuaActivity" />
+        <service android:name=".service.AutoClickService" />
     </application>
 
 </manifest>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="trainedData">
+        <item>chi_sim</item>
+        <item>eng</item>
+    </string-array>
+</resources>
