@@ -1,34 +1,48 @@
 package sun.sundy.sundygithubtest.javademo;
 
+import java.util.Arrays;
+
 public class JavaDemo {
 
     private int count = 10;
     private static final String TAG = "test";
 
     public static void main(String[] args) {
-        try {
-            ThreeThread threeThread = new ThreeThread();
-//            threeThread.setDaemon(true);
-            threeThread.start();
-            Thread.sleep(5000);
-            System.out.println("结束");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 30; i++) {
-                    try {
-                        Thread.sleep(1000);
-                        System.out.println("j=" + i);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        int[] sort = {3,4,1,2,5,7,6,9,8};
+        for (int i = 0; i < sort.length; i++) {
+            for (int k = i+1; k < sort.length; k++) {
+                if (sort[i] < sort[k]){
+                    int temp = sort[i];
+                    sort[i] = sort[k];
+                    sort[k] = temp;
                 }
             }
-        }).start();
+        }
+        System.out.println(Arrays.toString(sort));
+//        try {
+//            ThreeThread threeThread = new ThreeThread();
+//            threeThread.setDaemon(true);
+//            threeThread.start();
+//            Thread.sleep(5000);
+//            System.out.println("结束");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 0; i < 30; i++) {
+//                    try {
+//                        Thread.sleep(1000);
+//                        System.out.println("j=" + i);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
 
 //        TwoTread twoTread = new TwoTread();
 //        twoTread.start();
