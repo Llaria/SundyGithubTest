@@ -7,85 +7,132 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_test"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/colorAccent"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/my_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:text="顶尖秤测试"
-        android:onClick="aclas_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-    <Button
-        android:text="发音人下载"
-        android:onClick="speaker_download"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="auto_click_test"
+                android:text="自动点击测试" />
 
-    <Button
-        android:text="讯飞测试"
-        android:onClick="speak_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/iv_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
-        android:text="支付宝到账123.33元"
-        android:id="@+id/et_speak"
-        app:showSoftKeyboard="false"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
 
-    <Button
-        android:text="支付宝声音测试"
-        android:onClick="alipay_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/my_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:text="大华秤测试"
-        android:onClick="dahua_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="zbar_test"
+                android:text="Zbar测试" />
 
-    <Button
-        android:text="OkHttp3测试"
-        android:onClick="okhttp_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="zxing_test"
+                android:text="Zxing测试" />
 
-    <Button
-        android:text="greendao3测试"
-        android:onClick="greendao_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="camera_test"
+                android:text="Camera测试" />
 
-    <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="md_test"
+                android:text="材料设计测试" />
 
-    <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="aclas_test"
+                android:text="顶尖秤测试" />
 
-    <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="speaker_download"
+                android:text="发音人下载" />
 
-    <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="speak_test"
+                android:text="讯飞测试" />
 
-    <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
+                android:id="@+id/et_speak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="支付宝到账123.33元"
+                app:showSoftKeyboard="false" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="alipay_test"
+                android:text="支付宝声音测试" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="dahua_test"
+                android:text="大华秤测试" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="okhttp_test"
+                android:text="OkHttp3测试" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="greendao_test"
+                android:text="greendao3测试" />
+
+            <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <sun.sundy.sundygithubtest.view.edittext.DeLBackEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

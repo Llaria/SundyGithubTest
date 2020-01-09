@@ -65,8 +65,60 @@ public class ExampleUnitTest {
         System.out.println(Arrays.toString(firstBarcode.getBytes()));
 
 
-        checkNum1("134586242427785632");
+        checkNum1("045332300196019125");
+        int num = 8470;
+        char n = (char) num;
+        System.out.println(n);
+        System.out.println(format(3.33533,3));
+        System.out.println(2019 / 1000.0 * 3.016171299);
+        System.out.println(format4(2019 / 1000.0 * 3.016171299, 9));
+        System.out.println(getDoubleCutTwoPointPrice(format4(2019 / 1000.0 * 3.016171299, 9)));
     }
+
+    public static double format4(double value, int precision) {
+        BigDecimal b = new BigDecimal(Double.toString(value));
+        double newValue = b.setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return newValue;
+    }
+
+    /**
+     * 获取截取2位小数的金额，盘点单专用
+     * @param price 金额，盘点单一般是9位
+     * @return 截取2位小数后的金额
+     */
+    public static String getDoubleCutTwoPointPrice(Double price) {
+        return (price == null ? "计算中" : getCutTwoPointMoney5(price));
+    }
+
+    /**
+     * 格式化成两位小数，舍弃第三位
+     */;
+    private static String getCutTwoPointMoney5(double value) {
+        DecimalFormat dFormat = new DecimalFormat("0.00");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        String result = dFormat.format(value);
+        if (compareDouble(Double.parseDouble(result),0) == 0) {
+            if (result.startsWith("-")) {
+                result = result.substring(1);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 比较两个价格的大小
+     * 返回值 1表示前面的大
+     * 0表示相等
+     * -1表示后面的大
+     */
+    public static int compareDouble(double value1, double value2) {
+        DecimalFormat dFormat = new DecimalFormat("#.000");
+        BigDecimal bdMoneyFir = new BigDecimal(dFormat.format(value1));
+        BigDecimal bdMoneySec = new BigDecimal(dFormat.format(value2));
+        return bdMoneyFir.compareTo(bdMoneySec);
+    }
+
+
 
     public static boolean checkNum1(String barcode) {
         int odd = 0;

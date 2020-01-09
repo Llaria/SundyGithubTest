@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import okhttp3.Call;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -40,7 +41,17 @@ public class OkHttp3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String url = "http://wwww.baidu.com";
-                OkHttpClient okHttpClient = new OkHttpClient();
+                OkHttpClient okHttpClient1 = new OkHttpClient.Builder().build();
+                OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request();
+                        System.out.println("request=====>>>>" + request.toString());
+                        Response response = chain.proceed(request);
+                        System.out.println("response====>>>>" + response.toString());
+                        return response;
+                    }
+                }).build();
                 Request request = new Request.Builder()
                         .url(url)
                         .get()
