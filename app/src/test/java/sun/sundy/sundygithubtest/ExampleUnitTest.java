@@ -22,6 +22,42 @@ import java.util.Locale;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
+        double x;
+        double y;
+        double z;
+        double loveTemp;
+        double love = 0.0;
+        double xBest = 0.0;
+        double yBest = 0.0;
+        double zBest = 0.0;
+
+        for (int i = 1; i < 1000; i++) {
+            x = 0.001 * i;
+            for (int j = 1; j < 1000; j++) {
+                y = 0.001 * j;
+                for (int k = 1; k < 1000; k++) {
+                    z = 0.001 * k;
+                    if (x + y + z < 1){
+                        if ((7.5 - 6.78 * x - 3.56 * y - 1.86 * z) < 5 && x != 0 && y != 0 && z != 0 && format4((1 - x - y - z),2) != 0){
+                            loveTemp = 3.4 - 0.73 * x - 0.43 * y - 0.17 * z;
+                            System.out.println("计算的最佳组合收益：" + loveTemp);
+                            if (love < loveTemp){
+                                love = loveTemp;
+                                xBest = x;
+                                yBest = y;
+                                zBest = z;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        System.out.println("=================最终组合收益：" + love);
+        System.out.println("xBest:" + xBest + ",yBest:" + yBest + ".zBest:" + zBest);
+
+
 //        assertEquals(4, 2 + 2);
 
 //        String weight = "4.009";
@@ -58,21 +94,21 @@ public class ExampleUnitTest {
 //        System.out.println(getCutTwoPointMoney3(00.9923231));
 //        System.out.println(getCutTwoPointMoney3(.45555));
 //        System.out.println(getCutTwoPointMoney3(76.38));
-
-        int charCode = 0;
-        String firstBarcode = (char)charCode + "666";
-        System.out.println(firstBarcode.trim());
-        System.out.println(Arrays.toString(firstBarcode.getBytes()));
-
-
-        checkNum1("045332300196019125");
-        int num = 8470;
-        char n = (char) num;
-        System.out.println(n);
-        System.out.println(format(3.33533,3));
-        System.out.println(2019 / 1000.0 * 3.016171299);
-        System.out.println(format4(2019 / 1000.0 * 3.016171299, 9));
-        System.out.println(getDoubleCutTwoPointPrice(format4(2019 / 1000.0 * 3.016171299, 9)));
+//
+//        int charCode = 0;
+//        String firstBarcode = (char)charCode + "666";
+//        System.out.println(firstBarcode.trim());
+//        System.out.println(Arrays.toString(firstBarcode.getBytes()));
+//
+//
+//        checkNum1("045332300196019125");
+//        int num = 8470;
+//        char n = (char) num;
+//        System.out.println(n);
+//        System.out.println(format(3.33533,3));
+//        System.out.println(2019 / 1000.0 * 3.016171299);
+//        System.out.println(format4(2019 / 1000.0 * 3.016171299, 9));
+//        System.out.println(getDoubleCutTwoPointPrice(format4(2019 / 1000.0 * 3.016171299, 9)));
     }
 
     public static double format4(double value, int precision) {
