@@ -31,14 +31,14 @@ public class ExampleUnitTest {
         double yBest = 0.0;
         double zBest = 0.0;
 
-        for (int i = 1; i < 1000; i++) {
-            x = 0.001 * i;
-            for (int j = 1; j < 1000; j++) {
-                y = 0.001 * j;
-                for (int k = 1; k < 1000; k++) {
-                    z = 0.001 * k;
+        for (int i = 1; i < 20; i++) {
+            x = 0.05 * i;
+            for (int j = 1; j < 20; j++) {
+                y = 0.05 * j;
+                for (int k = 1; k < 20; k++) {
+                    z = 0.05 * k;
                     if (x + y + z < 1){
-                        if ((7.5 - 6.78 * x - 3.56 * y - 1.86 * z) < 5 && x != 0 && y != 0 && z != 0 && format4((1 - x - y - z),2) != 0){
+                        if ((7.5 - 6.78 * x - 3.56 * y - 1.86 * z) <= 4 && x != 0 && y != 0 && z != 0 && format4((1 - x - y - z),2) != 0){
                             loveTemp = 3.4 - 0.73 * x - 0.43 * y - 0.17 * z;
                             System.out.println("计算的最佳组合收益：" + loveTemp);
                             if (love < loveTemp){
