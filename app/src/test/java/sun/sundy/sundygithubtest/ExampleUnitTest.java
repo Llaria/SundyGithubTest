@@ -38,7 +38,8 @@ public class ExampleUnitTest {
                 for (int k = 1; k < 20; k++) {
                     z = 0.05 * k;
                     if (x + y + z < 1){
-                        if ((7.5 - 6.78 * x - 3.56 * y - 1.86 * z) <= 4 && x != 0 && y != 0 && z != 0 && format4((1 - x - y - z),2) != 0){
+                        if ((7.5 - 6.78 * x - 3.56 * y - 1.86 * z) <= 4 /*&& x != 0 && y != 0 && z != 0 && format4((1 - x - y - z),2) != 0*/
+                                && x >= 0.3 && x <= 0.4 && y >= 0.2 && y <= 0.4 && z <= y && z <= (1 - x - y - z) && (1 - x - y - z) >= 0.1 && (1 - x - y - z) <= 0.4){
                             loveTemp = 3.4 - 0.73 * x - 0.43 * y - 0.17 * z;
                             System.out.println("计算的最佳组合收益：" + loveTemp);
                             if (love < loveTemp){
