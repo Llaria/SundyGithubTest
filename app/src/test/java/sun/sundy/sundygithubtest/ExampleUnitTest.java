@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,6 +22,82 @@ import java.util.Locale;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
+
+        String test = "我\n爱\n你\n我是\n中国\n的\n好人";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        double x;
+        double y;
+        double z;
+        double loveTemp;
+        double love = 0.0;
+        double xBest = 0.0;
+        double yBest = 0.0;
+        double zBest = 0.0;
+
+        for (int i = 1; i < 20; i++) {
+            x = 0.05 * i;
+            for (int j = 1; j < 20; j++) {
+                y = 0.05 * j;
+                for (int k = 1; k < 20; k++) {
+                    z = 0.05 * k;
+                    if (x + y + z < 1){
+                        if ((7.5 - 6.78 * x - 3.56 * y - 1.86 * z) <= 4 /*&& x != 0 && y != 0 && z != 0 && format4((1 - x - y - z),2) != 0*/
+                                && x >= 0.3 && x <= 0.4 && y >= 0.2 && y <= 0.4 && z <= y && z <= (1 - x - y - z) && (1 - x - y - z) >= 0.1 && (1 - x - y - z) <= 0.4){
+                            loveTemp = 3.4 - 0.73 * x - 0.43 * y - 0.17 * z;
+                            System.out.println("计算的最佳组合收益：" + loveTemp);
+                            if (love < loveTemp){
+                                love = loveTemp;
+                                xBest = x;
+                                yBest = y;
+                                zBest = z;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        System.out.println("=================最终组合收益：" + love);
+        System.out.println("xBest:" + xBest + ",yBest:" + yBest + ".zBest:" + zBest);
+
+
 //        assertEquals(4, 2 + 2);
 
 //        String weight = "4.009";
@@ -37,18 +115,162 @@ public class ExampleUnitTest {
 //        String test = "—";
 //        System.out.println(Arrays.toString(test.getBytes()));
 
-        String order = "!0V0001A0002214000970000000000807000000000000000000000000010610071220131830192440B4102193803190323C4662D4662E";
-        System.out.println(Arrays.toString(order.getBytes()));
-
-        byte[] orderByte = {33, 48, 86, 48, 50, 56, 57, 65, 48, 48, 48, 50, 52, 52, 48, 48, 48, 48, 55, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 56, 48, 55,
-                48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49, 48, 54, 49, 48, 48, 55, 49, 50, 50, 48,
-                49, 51, 49, 56, 51, 48, 49, 57, 50, 52, 52, 48, 66, 50, 51, 48, 50, 50, 51, 48, 50, 50, 51, 48, 50, 50, 52, 57, 48, 67, 52, 54, 54, 50, 68, 52, 54, 54, 50, 69, 13, 10, 3};
-        System.out.println(new String(orderByte));
-
-        getTotalAreaCode("散称37");
-        checkNum("700002201500000984");
-        System.out.println("".replace("Z", "0"));
+//        String order = "!0V0001A0002214000970000000000807000000000000000000000000010610071220131830192440B4102193803190323C4662D4662E";
+//        System.out.println(Arrays.toString(order.getBytes()));
+//
+//        byte[] orderByte = {33, 48, 86, 48, 50, 56, 57, 65, 48, 48, 48, 50, 52, 52, 48, 48, 48, 48, 55, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 56, 48, 55,
+//                48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49, 48, 54, 49, 48, 48, 55, 49, 50, 50, 48,
+//                49, 51, 49, 56, 51, 48, 49, 57, 50, 52, 52, 48, 66, 50, 51, 48, 50, 50, 51, 48, 50, 50, 51, 48, 50, 50, 52, 57, 48, 67, 52, 54, 54, 50, 68, 52, 54, 54, 50, 69, 13, 10, 3};
+//        System.out.println(new String(orderByte));
+//
+//        getTotalAreaCode("散称37");
+//        checkNum("700002201500000984");
+//
+//        System.out.println( "".replace("Z", "0"));
+//
+//
+//        System.out.println(getCutTwoPointMoney3(-1.999999999));
+//        System.out.println(getCutTwoPointMoney3(.11));
+//        System.out.println(getCutTwoPointMoney3(00.9923231));
+//        System.out.println(getCutTwoPointMoney3(.45555));
+//        System.out.println(getCutTwoPointMoney3(76.38));
+//
+//        int charCode = 0;
+//        String firstBarcode = (char)charCode + "666";
+//        System.out.println(firstBarcode.trim());
+//        System.out.println(Arrays.toString(firstBarcode.getBytes()));
+//
+//
+//        checkNum1("045332300196019125");
+//        int num = 8470;
+//        char n = (char) num;
+//        System.out.println(n);
+//        System.out.println(format(3.33533,3));
+//        System.out.println(2019 / 1000.0 * 3.016171299);
+//        System.out.println(format4(2019 / 1000.0 * 3.016171299, 9));
+//        System.out.println(getDoubleCutTwoPointPrice(format4(2019 / 1000.0 * 3.016171299, 9)));
     }
+
+    public static double format4(double value, int precision) {
+        BigDecimal b = new BigDecimal(Double.toString(value));
+        double newValue = b.setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return newValue;
+    }
+
+    /**
+     * 获取截取2位小数的金额，盘点单专用
+     * @param price 金额，盘点单一般是9位
+     * @return 截取2位小数后的金额
+     */
+    public static String getDoubleCutTwoPointPrice(Double price) {
+        return (price == null ? "计算中" : getCutTwoPointMoney5(price));
+    }
+
+    /**
+     * 格式化成两位小数，舍弃第三位
+     */;
+    private static String getCutTwoPointMoney5(double value) {
+        DecimalFormat dFormat = new DecimalFormat("0.00");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        String result = dFormat.format(value);
+        if (compareDouble(Double.parseDouble(result),0) == 0) {
+            if (result.startsWith("-")) {
+                result = result.substring(1);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 比较两个价格的大小
+     * 返回值 1表示前面的大
+     * 0表示相等
+     * -1表示后面的大
+     */
+    public static int compareDouble(double value1, double value2) {
+        DecimalFormat dFormat = new DecimalFormat("#.000");
+        BigDecimal bdMoneyFir = new BigDecimal(dFormat.format(value1));
+        BigDecimal bdMoneySec = new BigDecimal(dFormat.format(value2));
+        return bdMoneyFir.compareTo(bdMoneySec);
+    }
+
+
+
+    public static boolean checkNum1(String barcode) {
+        int odd = 0;
+        int even = 0;
+        for (int i = 0; i < barcode.length() - 1; i++) {
+            int num = Integer.parseInt(String.valueOf(barcode.charAt(i)));
+            if ((i + 1) % 2 == 0)
+                odd = odd + num;
+            else
+                even = even + num;
+        }
+        int amount = odd * 3 + even;
+        int Z = (amount / 10 + 1) * 10 - amount;
+        boolean isCheckPass = String.valueOf(Z == 10 ? 0 : Z).equals(String.valueOf(barcode.charAt(barcode.length() - 1)));
+        System.out.println(barcode + "======》》》校验码：" + (Z == 10 ? 0 : Z) + "校验是否通过：" + isCheckPass);
+        return isCheckPass;
+    }
+
+
+    private static String getCutTwoPointMoney3(double value) {
+        DecimalFormat dFormat = new DecimalFormat("0.00");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        BigDecimal b = new BigDecimal(value);
+        return dFormat.format(b.setScale(2, RoundingMode.DOWN).doubleValue());
+    }
+
+    /**
+     * 获取截取2位小数的金额，盘点单专用
+     * @param price 金额，盘点单一般是9位
+     * @return 截取2位小数后的金额
+     */
+    public static String getDoubleCutTwoPointPrice2(Double price) {
+        return (price == null ? "计算中" : getCutTwoPointMoney(price));
+    }
+
+
+    private static String getCutTwoPointMoney2(double value) {
+        DecimalFormat dFormat = new DecimalFormat("#.0000");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        String money = dFormat.format(value);
+        String frist = money.substring(0, 1);
+        if (".".equals(frist)) {
+            return "0" + money.substring(0, 3);
+        }
+        int index = getIndex(money, '.');
+        if (index == -1) {
+            return "0.0";
+        }
+        return money.substring(0, index + 3);
+    }
+
+    private static String getCutTwoPointMoney(double value) {
+        DecimalFormat dFormat = new DecimalFormat("#.0000");
+        dFormat.setRoundingMode(RoundingMode.DOWN);
+        String money = dFormat.format(value);
+        String frist = money.substring(0, 1);
+        if (".".equals(frist)) {
+            return "0" + money.substring(0, 3);
+        }
+        int index = getIndex(money, '.');
+        if (index == -1) {
+            return "0.0";
+        }
+        return money.substring(0, index + 3);
+    }
+
+    private static int getIndex(String str, char ch) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '.') {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 
     private String getTotalAreaCode(String name) {
         StringBuilder stringBuilder = new StringBuilder();

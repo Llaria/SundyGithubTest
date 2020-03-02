@@ -1,25 +1,26 @@
 package sun.sundy.sundygithubtest;
 
 import android.app.Application;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.util.Log;
 
 import com.alipay.iot.sdk.APIManager;
 import com.alipay.iot.sdk.InitFinishCallback;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.DecodeHintType;
 
-import org.greenrobot.greendao.database.Database;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.HashMap;
 
-import java.util.List;
-
-import sun.sundy.sundygithubtest.sql.entity.UserEntity;
-import sun.sundy.sundygithubtest.sql.gen.DaoMaster;
-import sun.sundy.sundygithubtest.sql.gen.DaoSession;
-import sun.sundy.sundygithubtest.sql.gen.UserEntityDao;
-import sun.sundy.sundygithubtest.sql.utils.BizDaoHelper;
-import sun.sundy.sundygithubtest.sql.utils.BizDaoManager;
-import sun.sundy.sundygithubtest.utils.FileUtil;
+import sun.sundy.sundygithubtest.service.AutoClickService;
+import sun.sundy.sundygithubtest.utils.SoundManager;
 import sun.sundy.sundygithubtest.utils.SpeechSoundManager;
 import sun.sundy.sundygithubtest.utils.ToastUtils;
-import sun.sundy.sundygithubtest.utils.WeightPreference;
 
 
 /**
@@ -34,7 +35,7 @@ public class SundyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initApp(this);
-
+        SoundManager.getInstance().initSoundPool();
         if (!SpeechSoundManager.getInstance().initSpeechService())
             ToastUtils.showLazzToast("请确认是否安装讯飞语音+");
 
@@ -53,27 +54,45 @@ public class SundyApplication extends Application {
             e.printStackTrace();
             Log.d("dd", "onCreate: ");
         }
-        if (WeightPreference.getInstance(app).isFirstIn()){
-            String dbPath = FileUtil.SDPATH + BizDaoHelper.DB_NAME;
-            Database database = new BizDaoHelper(app,dbPath).getWritableDb();
-            DaoMaster daoMaster = new DaoMaster(database);
-            DaoSession daoSession = daoMaster.newSession();
-            UserEntityDao userEntityDao = daoSession.getUserEntityDao();
-            List<UserEntity> datas = userEntityDao.loadAll();
-            daoSession.clear();
-            database.close();
-            FileUtil.deleteFile(dbPath);
-            BizDaoManager.getInstance().init();
-            for (int i = 0; i < datas.size(); i++) {
-                UserEntity userEntity = new UserEntity();
-                userEntity.setName(datas.get(i).getName());
-                userEntity.setAge(datas.get(i).getAge());
-                UserEntityDao userEntityDao1 = BizDaoManager.getInstance().getDaoSession().getUserEntityDao();
-                userEntityDao1.insert(userEntity);
-            }
-        }else {
-            BizDaoManager.getInstance().init();
-        }
+
+        bindUploadService();
+
+        HashMap<DecodeHintType, Object> decodeHints = new HashMap();
+        Collection<BarcodeFormat> decodeFormats = EnumSet.noneOf(BarcodeFormat.class);
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.EAN_13));
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.EAN_8));
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.CODE_128));
+        decodeFormats.addAll(EnumSet.of(BarcodeFormat.QR_CODE));
+        decodeHints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
+        decodeHints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
+        decodeHints.put(DecodeHintType.TRY_HARDER, 1);
+        //是否先拿原图直接通过zxing进行识别
+//        BScan.TRY_SPEED = false;
+//        BScan.decodeHints = decodeHints;
+//        BScan.init(this);
+
+
+//        if (WeightPreference.getInstance(app).isFirstIn()){
+//            String dbPath = FileUtil.SDPATH + BizDaoHelper.DB_NAME;
+//            Database database = new BizDaoHelper(app,dbPath).getWritableDb();
+//            DaoMaster daoMaster = new DaoMaster(database);
+//            DaoSession daoSession = daoMaster.newSession();
+//            UserEntityDao userEntityDao = daoSession.getUserEntityDao();
+//            List<UserEntity> datas = userEntityDao.loadAll();
+//            daoSession.clear();
+//            database.close();
+//            FileUtil.deleteFile(dbPath);
+//            BizDaoManager.getInstance().init();
+//            for (int i = 0; i < datas.size(); i++) {
+//                UserEntity userEntity = new UserEntity();
+//                userEntity.setName(datas.get(i).getName());
+//                userEntity.setAge(datas.get(i).getAge());
+//                UserEntityDao userEntityDao1 = BizDaoManager.getInstance().getDaoSession().getUserEntityDao();
+//                userEntityDao1.insert(userEntity);
+//            }
+//        }else {
+//            BizDaoManager.getInstance().init();
+//        }
     }
 
     private void initApp(SundyApplication application) {
@@ -83,4 +102,27 @@ public class SundyApplication extends Application {
     public static SundyApplication getInstance() {
         return app;
     }
+
+    /**
+     * 启动服务
+     */
+    public void bindUploadService() {
+        Intent intent = new Intent(this, AutoClickService.class);
+        bindService(intent, conn, Context.BIND_AUTO_CREATE);
+    }
+
+    private AutoClickService chuangXinService;
+    private ServiceConnection conn = new ServiceConnection() {
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            chuangXinService = null;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            AutoClickService.ChuangXinServiceBinder binder = (AutoClickService.ChuangXinServiceBinder) service;
+            chuangXinService = binder.getService();
+        }
+    };
 }

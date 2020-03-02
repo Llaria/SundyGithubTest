@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="sun.sundy.sundygithubtest">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".SundyApplication"
@@ -13,10 +16,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".SqlActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".autoclick.OcrActivity"></activity>
+        <activity android:name=".autoclick.AutoClickActivity" />
+        <activity android:name=".camera.CameraActivity" />
+        <activity
+            android:name=".scan.ZxingScanActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeScan" />
+        <activity
+            android:name=".scan.ZbarScanActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeScan" />
+        <activity
+            android:name=".design.DesignActivity"
+            android:label="材料设计" />
+        <activity android:name=".SqlActivity" />
         <activity android:name=".network.OkHttp3Activity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,6 +46,7 @@
         <activity android:name=".AclasTestActivity" />
         <activity android:name=".socket.SocketActivity" />
         <activity android:name=".DahuaActivity" />
+        <service android:name=".service.AutoClickService" />
     </application>
 
 </manifest>
