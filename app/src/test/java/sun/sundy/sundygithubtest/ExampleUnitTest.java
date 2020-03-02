@@ -47,6 +47,7 @@ public class ExampleUnitTest {
 
         getTotalAreaCode("散称37");
         checkNum("700002201500000984");
+        System.out.println("".replace("Z", "0"));
     }
 
     private String getTotalAreaCode(String name) {

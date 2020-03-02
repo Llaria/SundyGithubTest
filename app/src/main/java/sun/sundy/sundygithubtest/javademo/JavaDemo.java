@@ -7,7 +7,6 @@ public class JavaDemo {
 
     public static void main(String[] args) {
 
-
         try {
             ThreeThread threeThread = new ThreeThread();
 //            threeThread.setDaemon(true);
