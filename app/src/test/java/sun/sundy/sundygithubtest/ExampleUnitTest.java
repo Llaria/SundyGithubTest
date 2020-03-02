@@ -22,6 +22,45 @@ import java.util.Locale;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
+
+        String test = "我\n爱\n你\n我是\n中国\n的\n好人";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         double x;
         double y;
         double z;
