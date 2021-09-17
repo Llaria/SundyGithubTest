@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import static sun.sundy.ndkdemo.SundyJniUtils.stringFromJNI;
+
 public class MainActivity extends AppCompatActivity {
 
-    static {
-        System.loadLibrary("native-lib");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +18,5 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(stringFromJNI());
     }
 
-    public native String stringFromJNI();
+
 }

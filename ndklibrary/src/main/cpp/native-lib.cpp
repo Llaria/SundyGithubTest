@@ -4,7 +4,7 @@
 extern "C" JNIEXPORT jstring
 
 JNICALL
-Java_sun_sundy_ndkdemo_SundyJniUtils_stringFromJNI(JNIEnv *env,jobject /* this */) {
+Java_sun_sundy_ndklibrary_SundyJniUtils_stringFromJNI(JNIEnv *env,jobject /* this */) {
     std::string hello = "Hello from C++";
 
 

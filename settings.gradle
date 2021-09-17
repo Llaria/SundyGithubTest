@@ -1,1 +1,2 @@
 include ':app', ':AclasLSToolSdk', ':aclaslstoolsdk2', ':ndkdemo'
+include ':ndklibrary'
